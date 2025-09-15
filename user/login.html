@@ -600,7 +600,7 @@
         submitBtn.disabled = true;
 
         // AJAX authentication
-        fetch('php/login.php', {
+        fetch('php/Login.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
