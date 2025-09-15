@@ -520,7 +520,7 @@
       <img src="Images/logo2.png" alt="Ayushvera Logo">
     </div>
     <h2>Welcome Back</h2>
-    <form id="login-form" action="php/Login.php" method="POST">
+    <form id="login-form" action="https://aushvera.infinityfreeapp.com/user/php/Login.php" method="POST">
       <div class="input-group">
         <i class="fas fa-envelope"></i>
         <input type="email" name="email" id="email" placeholder="Email Address" required />
@@ -600,7 +600,7 @@
         submitBtn.disabled = true;
 
         // AJAX authentication
-        fetch('php/Login.php', {
+        fetch('https://aushvera.infinityfreeapp.com/user/php/Login.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
