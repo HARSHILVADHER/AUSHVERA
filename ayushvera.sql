@@ -137,6 +137,11 @@ CREATE TABLE `product` (
   `status` varchar(20) DEFAULT 'Active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `images` text DEFAULT NULL
+  `product_details` text DEFAULT NULL,
+  `ingredients_heading` text DEFAULT NULL,
+  `ingredients_data` text DEFAULT NULL,
+  `how_to_use_heading` text DEFAULT NULL,
+  `how_to_use_data` text DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

@@ -4,6 +4,7 @@ $db   = 'if0_39067962_aushvera';
 $user = 'if0_39067962';
 $pass = 'Harshil532004';
 
+
 $conn = new mysqli($host, $user, $pass, $db);
 
 // Check connection
