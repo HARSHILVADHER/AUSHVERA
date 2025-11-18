@@ -600,7 +600,8 @@
         submitBtn.disabled = true;
 
         // AJAX authentication
-        fetch('https://aushvera.infinityfreeapp.com/user/php/Login.php', {
+        // use this in deployment https://aushvera.infinityfreeapp.com/user/php/Login.php
+        fetch('./php/login.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`

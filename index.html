@@ -175,20 +175,28 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to right, rgba(7, 27, 66, 0.8) 0%, rgba(7, 27, 66, 0.4) 100%);
       z-index: 1;
     }
 
-    .hero-video {
+    .hero-carousel {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      z-index: 0;
+      z-index: -1;
     }
 
+    .carousel-inner,
+    .carousel-item,
+    .carousel-img {
+      height: 100%;
+    }
+    
+    .carousel-img {
+      object-fit: cover; /* images fit container properly */
+    }
+    
     .hero-content {
       position: relative;
       z-index: 2;
@@ -879,18 +887,36 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="user/intro 2.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-    
+    <!-- Carousel Container -->
+    <div id="heroCarousel" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="./user/php/uploads/hero-1.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./user/php/uploads/hero-2.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./user/php/uploads/hero-3.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./user/php/uploads/hero-4.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./user/php/uploads/hero-5.jpg" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./user/php/uploads/hero-2.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="hero-content" data-aos="fade-right" data-aos-duration="1000" style="margin-top: 100px;">
-        <h1 class="hero-title animate__animated animate__fadeInDown">Ayushvera<br><span class="text-gold">Herbal Excellence</span></h1>
+        <h1 class=" animate__animated animate__fadeInDown"><span class="text-gold hero-title">Pure Herbal Tea</span></h1>
         <p class="hero-subtitle animate__animated animate__fadeIn animate__delay-1s">
-          Discover the essence of nature with Ayushvera...<br>
-          Our premium herbal products are crafted with tradition and science, delivering wellness with every use.<br> 
-          Experience <span class="highlight">natural purity</span> and <span class="highlight">trusted quality</span> in every product.
+          Experience the calming blend of handpicked herbs crafted for natural healing and daily wellness.
         </p>
         <div class="animate__animated animate__fadeIn animate__delay-2s">
           <a href="user/login.html" class="btn btn-hero btn-hero-primary">Discover Our Range</a>
@@ -1172,7 +1198,7 @@
         <div class="col-lg-4 mb-5 mb-lg-0">
           <div class="footer-about">
             <div class="footer-logo">
-              <img src="Images/logo bg.png" alt="Ayushvera Logo" style="height: 80px;">
+              <img src="./user/Images/logo bg.png" alt="Ayushvera Logo" style="height: 80px;">
             </div>
             <p>Bringing the wisdom of Ayurveda to the modern world with premium herbal products crafted for health and wellness.</p>
             <div class="social-links">
@@ -1251,7 +1277,44 @@
       }
     });
     
-    
+    //hero text changes
+    const heroTexts = [
+      {
+        title: "Pure Herbal Tea",
+        desc: "Experience the calming blend of handpicked herbs crafted for natural healing and daily wellness."
+      },
+      {
+        title: "Boost Your Immunity",
+        desc: "Sip the richness of Ayurvedic herbs that naturally strengthen immunity and rejuvenate your body."
+      },
+      {
+        title: "Detox & Refresh",
+        desc: "Cleanse your body with antioxidant-rich herbal tea designed to refresh your mind and soul."
+      },
+      {
+        title: "Nature’s Goodness in Every Sip",
+        desc: "Made with the finest botanical ingredients, our herbal tea brings purity straight from nature."
+      },
+      {
+        title: "Stress Relief Herbal Blend",
+        desc: "Relax and unwind with our soothing herbal formula perfect for stress relief and deep relaxation."
+      },
+      {
+        title: "Ayurvedic Wellness Tea",
+        desc: "A traditional Ayurvedic blend crafted to balance your energy, improve digestion, and promote wellness."
+      }
+    ];
+    const titleEl = document.querySelector(".hero-title");
+    const descEl = document.querySelector(".hero-subtitle");
+
+    const carousel = document.querySelector("#heroCarousel");
+    carousel.addEventListener("slid.bs.carousel", function (event) {
+      const index = event.to;
+
+      titleEl.innerHTML = heroTexts[index].title;
+      descEl.innerHTML = heroTexts[index].desc;
+    });
+
     
     // Lazy load images
     const lazyImages = document.querySelectorAll('img[data-src]');

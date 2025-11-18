@@ -168,8 +168,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `role`) VALUES
-(11, 'vadher harshil', 'harshil01', 'harshil@gmail.com', '$2y$10$Ws4xol1uHD..aambc6BwHufge9Bn4K1jnrnOgBQsmshrP/yjjMtWi', 'customer'),
-(12, 'akash chudasama', 'akash', 'akash@gmail.com', '$2y$10$HHOREzzF3xu55XtW1iG42OxPZr8n/GQ/60S4qqi/DnPRkQKcuQEtK', 'customer');
+(11, 'vadher harshil', 'harshil01', 'harshil@gmail.com', '123asd', 'customer'),
+(12, 'akash chudasama', 'akash', 'akash@gmail.com', '123asd', 'customer');
 
 -- --------------------------------------------------------
 

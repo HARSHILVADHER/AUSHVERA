@@ -109,7 +109,7 @@ function addToCart($user_id, $data) {
     global $conn;
     
     $product_id = $data['product_id'] ?? 0;
-            $quantity = $data['quantity'] ?? 1;
+    $quantity = $data['quantity'] ?? 1;
             
     if (!$product_id) {
         echo json_encode([
