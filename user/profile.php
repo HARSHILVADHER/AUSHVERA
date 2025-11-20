@@ -1,3 +1,7 @@
+<?php
+ require_once "../auth_check.php"
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1236,8 +1240,8 @@
       <a href="#" class="nav-link">Shop Now</a>
     </nav>
     <div class="icons">
-      <button onclick="window.location.href='cart.html'" class="btn btn-outline-secondary me-2"><i class="fas fa-shopping-bag"></i></button>
-      <button class="btn btn-outline-secondary"><i class="fas fa-user"></i></button>
+      <button onclick="window.location.href='cart.php'" class="btn btn-outline-secondary me-2"><i class="fas fa-shopping-bag"></i></button>
+      <button onclick="window.location.href='profile.php'" class="btn btn-outline-secondary"><i class="fas fa-user"></i></button>
       <button class="btn btn-outline-secondary d-lg-none ms-2" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </div>
   </header>

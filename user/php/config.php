@@ -1,14 +1,10 @@
 <?php
 // Database configuration
-// $host = 'sql207.infinityfree.com';
-// $db   = 'if0_39067962_aushvera';
-// $user = 'if0_39067962';
-// $pass = 'Harshil532004';
+$host = 'sql207.infinityfree.com';
+$db   = 'if0_39067962_aushvera';
+$user = 'if0_39067962';
+$pass = 'Harshil532004';
 
-$host = 'localhost';
-$db   = 'aushvera';
-$user = 'root';
-$pass = '';
 // Create connection
 $conn = new mysqli($host, $user, $pass, $db);
 
