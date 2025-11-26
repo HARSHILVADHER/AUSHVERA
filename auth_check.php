@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: /aushvera/user/login.html");
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== "user")  {
+    header("Location: ./login.html");
+    // header("Location: login.html");
     exit();
 }
 ?>

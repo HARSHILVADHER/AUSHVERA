@@ -9,6 +9,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shopping Cart - Ayushvera</title>
   
+  <!-- fevicon icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest"> 
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   
@@ -511,15 +517,16 @@
       <a href="product.html" class="nav-link">Products</a>
       <a href="aboutus.html" class="nav-link">About Us</a>
       <a href="contactus.html" class="nav-link">Contact</a>
+      <a href="happy_customer.html" class="nav-link">Happy Customer</a>
     </nav>
     <div class="icons">
-      <a href="cart.html" class="btn btn-outline-secondary me-2 position-relative">
+      <a href="cart.php" class="btn btn-outline-secondary me-2 position-relative">
         <i class="fas fa-shopping-bag"></i>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count" style="display: none;">
           0
         </span>
       </a>
-      <a href="profile.html" class="btn btn-outline-secondary"><i class="fas fa-user"></i></a>
+      <a href="profile.php" class="btn btn-outline-secondary"><i class="fas fa-user"></i></a>
       <button class="btn btn-outline-secondary d-lg-none ms-2" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </div>
   </header>
@@ -840,7 +847,7 @@
       
       // Here you would redirect to checkout page
       alert('Proceeding to checkout...');
-      window.location.href = 'checkout.html';
+      window.location.href = 'checkout.php';
     }
 
     // Function to add item to cart (called from other pages)

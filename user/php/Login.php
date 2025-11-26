@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check for admin credentials first
     if ($email === 'aushveraadmin@gmail.com' && $password === 'adminaushvera') {
+        $_SESSION['role'] = "admin";
         $_SESSION['user_id'] = 'admin';
         $_SESSION['email'] = $email;
         $_SESSION['name'] = 'Admin';
@@ -27,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Use password_verify for hashed passwords
         if (password_verify($password, $user['password'])) {
+            $_SESSION['role'] = "user";
             $_SESSION['user_id'] = $user['id']; // Store user_id for multi-user logic
             $_SESSION['email'] = $user['email'];
             $_SESSION['name'] = $user['name'];

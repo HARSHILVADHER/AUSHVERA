@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ayushvera Golden Immunity Blend | Premium Herbal Tea</title>
   
+  <!-- fevicon icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest"> 
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   
@@ -929,7 +935,7 @@
       <a href="product.html" class="nav-link active">Products</a>
       <a href="aboutus.html" class="nav-link">About Us</a>
       <a href="contactus.html" class="nav-link">Contact</a>
-      <a href="#" class="nav-link">Shop Now</a>
+      <a href="happy_customer.html" class="nav-link">Happy Customer</a>
     </nav>
     <div class="icons">
       <a href="cart.php" class="btn btn-outline-secondary me-2"><i class="fas fa-shopping-bag"></i></a>
@@ -1158,7 +1164,7 @@
     function addToCartFromDetail() {
         const productId = getProductIdFromUrl();
         const quantity = parseInt(document.getElementById('qty').value) || 1;
-        
+          
         if (!productId) {
             alert('Product not found!');
             return;
@@ -1180,7 +1186,7 @@
             if (data.success) {
                 // Show success message and redirect to cart
                 alert('Product added to cart!');
-                window.location.href = 'cart.html';
+                window.location.href = 'cart.php';
             } else {
                 alert('Error: ' + data.message);
             }
@@ -1206,7 +1212,7 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                window.location.href = 'checkout.html?order=buynow';
+                window.location.href = 'checkout.php?order=buynow';
             } else {
                 alert('Order failed: ' + data.message);
             }
@@ -1216,6 +1222,36 @@
             alert('Error placing order');
         });
     }
+
+    // Add to cart function
+    // function addToCart() {
+    //   const productId = getProductIdFromUrl();
+    //   fetch('php/cart_operations.php', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       action: 'add',
+    //       product_id: productId,
+    //       quantity: 1
+    //     })
+    //   })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data.success) {
+    //       // Show success message and redirect to cart
+    //       alert('Product added to cart!');
+    //       window.location.href = 'cart.php';
+    //     } else {
+    //       alert('Error: ' + data.message);
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error('Error adding to cart:', error);
+    //     alert('Error adding product to cart');
+    //   });
+    // }
 
     document.addEventListener('DOMContentLoaded', function() {
         const params = new URLSearchParams(window.location.search);

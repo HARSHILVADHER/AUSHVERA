@@ -8,7 +8,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Profile | Ayushvera - Premium Herbal Products</title>
+
+  <!-- fevicon icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest"> 
   
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   
@@ -1237,7 +1245,7 @@
       <a href="product.html" class="nav-link">Products</a>
       <a href="aboutus.html" class="nav-link">About Us</a>
       <a href="contactus.html" class="nav-link">Contact</a>
-      <a href="#" class="nav-link">Shop Now</a>
+      <a href="happy_customer.html" class="nav-link">Happy Customer</a>
     </nav>
     <div class="icons">
       <button onclick="window.location.href='cart.php'" class="btn btn-outline-secondary me-2"><i class="fas fa-shopping-bag"></i></button>
@@ -1266,7 +1274,6 @@
           <li><a href="#profile" class="active">Profile</a></li>
           <li><a href="#orders">My Orders</a></li>
           <li><a href="#tracking">Track Order</a></li>
-          <li><a href="#wishlist">Wishlist</a></li>
           <li><a href="#addresses">Addresses</a></li>
           <li><a href="#settings">Settings</a></li>
         </ul>
@@ -1503,6 +1510,16 @@
           </div>
         </div>
       </div>
+
+      <!-- orders section -->
+      <div id="orders" class="space-y-6">
+      </div>
+
+      <!-- tracking section -->
+      <div id="tracking" class="space-y-6">
+      </div>
+
+
     </div>
   </div>
 
@@ -1893,7 +1910,7 @@
             document.getElementById('city').value = data.profile.city || '';
           }
           // Navigate to profile page with success parameter
-          window.location.href = 'profile.html?success=1';
+          window.location.href = 'profile.php?success=1';
         } else {
           throw new Error(data.message || 'Failed to update profile');
         }
@@ -1937,11 +1954,94 @@
               console.log('Loading addresses for addresses section');
               loadAddresses();
             }
+            // orders
+            if (targetId === 'orders') {
+              console.log('Loading.. orders section');
+              myOrder();
+            }
+
+            // tracking
+            if (targetId === 'tracking') {
+              console.log('Loading.. tracking section');
+              myOrder();
+            }
           } else {
             console.log('Section not found:', targetId);
           }
         });
       });
+    }
+
+    //showing orders
+    async function myOrder(){
+      const res = await fetch("./php/fetch_order.php");
+      const data = await res.json();
+
+      const container = document.getElementById("orders");
+
+      if (!data.success || data.orders.length === 0) {
+        container.innerHTML = `<p class="text-gray-600">No orders found.</p>`;
+        return;
+      }
+
+      let html = "";
+
+      data.orders.forEach(order => {
+        let productHTML = "";
+
+        order.items.forEach(item => {
+            productHTML += `
+                <div class="flex justify-between text-sm text-gray-700">
+                    <span>${item.name} (x${item.quantity})</span>
+                    <span>₹${item.price}</span>
+                </div>
+            `;
+        });
+
+        html += `
+          <div class="bg-white rounded-xl shadow p-5 border">
+              <div class="flex justify-between">
+                  <h3 class="font-semibold text-lg">Order #${order.id}</h3>
+                  <span class="text-sm text-gray-500">${order.created_at}</span>
+              </div>
+
+              <div class="mt-3 space-y-1">
+                  ${productHTML}
+              </div>
+
+              <hr class="my-3">
+
+              <div class="flex justify-between text-gray-800 font-semibold">
+                  <span>Total Amount:</span>
+                  <span>₹${order.total_amount}</span>
+              </div>
+
+              <div class="mt-2 flex justify-between text-sm">
+                  <span class="text-gray-600">Order Status:</span>
+                  <span class="px-3 py-1 rounded-xl  text-xs
+                      ${order.status === 'pending' ? 'bg-yellow-100 text-yello-500' : 'bg-green-100 text-green-500'}">
+                      ${order.status}
+                  </span>
+              </div>
+
+              <div class="mt-2 flex justify-between text-sm">
+                  <span class="text-gray-600">Payment Status:</span>
+                  <span class="px-3 py-1 rounded-xl  text-xs
+                      ${order.payment_status === 'unpaid' ? 'bg-red-100 text-red-500' : 'bg-green-100 text-green-500'}">
+                      ${order.payment_status}
+                  </span>
+              </div>
+
+              ${
+                  order.razorpay_payment_id 
+                  ? `<p class="text-sm text-gray-600 mt-2">Payment ID: <span class="font-medium">${order.razorpay_payment_id}</span></p>`
+                  : ""
+              }
+          </div>
+          `;
+      });
+
+      container.innerHTML = html;
     }
 
     // Check URL parameters for success/error messages
@@ -2150,7 +2250,6 @@
           
           const data = await response.json();
         if (data.success) {
-            alert('Logged out successfully!');
           window.location.href = 'login.html';
         } else {
             throw new Error(data.message || 'Logout failed');
@@ -2166,12 +2265,20 @@
 
     // Settings functions
     function showChangePasswordForm() {
-      alert('Change password functionality would be implemented here. In a real application, this would show a form to change the password.');
+      window.location.href = "forgot-password.html";
     }
 
-    function showDeleteAccountModal() {
-      if (confirm('Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.')) {
-        alert('Delete account functionality would be implemented here. In a real application, this would permanently delete the user account.');
+    async function showDeleteAccountModal() {
+      if (!confirm('Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.')) return;
+
+      const res = await fetch("./php/delete_account.php", { method: "POST" });
+      const data = await res.json()
+    
+      if (data.success) {
+        alert("Account deleted successfully");
+        window.location.href = "../index.html";
+      } else {
+        alert(data.message);
       }
     }
 

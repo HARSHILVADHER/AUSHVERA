@@ -14,7 +14,13 @@ if (!$product_id || !$quantity) {
 // Get user_id from session if logged in
 $user_id = isset($_SESSION['user_id']) ? intval($_SESSION['user_id']) : null;
 
-$stmt = $conn->prepare("INSERT INTO buynow (user_id, product_id, quantity) VALUES (?, ?, ?)");
+$sql = "
+    INSERT INTO buynow (user_id, product_id, quantity)
+    VALUES (?, ?, ?)
+    ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)
+";
+
+$stmt = $conn->prepare($sql);
 $stmt->bind_param("iii", $user_id, $product_id, $quantity);
 
 if ($stmt->execute()) {
