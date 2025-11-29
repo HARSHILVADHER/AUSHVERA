@@ -19,7 +19,8 @@
     $result = $stmt->get_result();
 
     while ($row = $result->fetch_assoc()) {
-        $reviews[] = $row;
+        $data = $row;
+        $reviews[] = $data;
     }
     echo json_encode($reviews);
 ?>

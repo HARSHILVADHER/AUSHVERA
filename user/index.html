@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ayushvera Globalbiz - Premium Herbal Products</title>
+  <title>Aushvera Globalbiz - Premium Herbal Products</title>
 
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <!-- fevicon icon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
@@ -960,22 +961,29 @@
       <a href="contactus.html" class="nav-link">Contact</a>
       <a href="happy_customer.html" class="nav-link">Happy Customer</a>
     </nav>
-    <div class="header-welcome" style="margin-right: 16px; font-weight: 500; color: white; display: flex; align-items: center;"></div>
+    <div class="header-welcome" class="hidden" style="margin-right: 16px; font-weight: 500; color: white; display: flex; align-items: center;"></div>
     <div class="icons">
-      <a href="cart.php" class="btn btn-outline-light me-2 position-relative">
+      <a href="cart.php" class="btn btn-outline-light ">
         <i class="fas fa-shopping-bag"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count" style="display: none;">
+        <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count" style="display: none;">
           0
-        </span>
+        </span> -->
       </a>
       <a href="profile.php" class="btn btn-outline-light"><i class="fas fa-user"></i></a>
-      <button class="btn btn-outline-light d-lg-none ms-2" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+      <button class="btn btn-outline-light d-lg-none " id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu d-lg-none">
-    <!-- Mobile menu content would go here -->
+    <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden flex-col gap-4  bg-white text-black px-4 py-5 mt-5 lg:hidden"
+  >
+    <a href="./index.html" class="block text-black py-2  border-b border-gray-700">Home</a>
+    <a href="./product.html" class="block text-black py-2 border-b border-gray-700">Products</a>
+    <a href="./aboutus.html" class="block text-black py-2 border-b border-gray-700">About Us</a>
+    <a href="./contactus.html" class="block text-black py-2 border-b border-gray-700">Contact</a>
+    <a href="./happy_customer.html" class="block text-black py-2 border-b border-gray-700">Happy Customer</a>
   </div>
 
   <!-- Hero Section -->
@@ -1043,7 +1051,7 @@
         </div>
         <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
           <div class="about-content">
-            <h2>About Ayushvera</h2>
+            <h2>About Aushvera</h2>
             <p>At Aushvera GlobalBiz, we don't just offer natural products — we offer an experience of elegance, heritage, and refinement. Every creation is a tribute to nature's intelligence, crafted with care, precision, and a deep reverence for ancient traditions that have stood the test of time.</p>
             <p>Our ingredients are hand-selected from the roots of history, inspired by sacred knowledge from across India and beyond from healing herbs whispered through Vedic texts to botanical rituals once reserved for kings and sages. We transform this wisdom into world-class products, blending timeless purity with modern luxury.</p>
             <p>But Aushvera is more than purity. We bring you the essence of class, the richness of culture, and the luxurious feeling of intentional living. From the way our products look and feel, to the experience they deliver — every detail is designed to elevate your lifestyle and awaken your senses.</p>
@@ -1100,7 +1108,7 @@
         <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
           <div class="testimonial-card">
             <div class="testimonial-text">
-              The Ayushvera Herbal Tea has transformed my morning routine. I feel more energized and focused throughout the day without the jitters of coffee.
+              The Aushvera Herbal Tea has transformed my morning routine. I feel more energized and focused throughout the day without the jitters of coffee.
             </div>
             <div class="testimonial-author">
               <div class="author-img">
@@ -1399,11 +1407,12 @@
     lazyImages.forEach(img => imageObserver.observe(img));
     
     // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-      mobileMenu.classList.toggle('show');
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("flex");
     });
 
     // Fetch and display the username in the header

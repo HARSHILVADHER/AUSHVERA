@@ -4,15 +4,23 @@
 // $user = 'if0_39067962';
 // $pass = 'Harshil532004';
 
-// $host = 'localhost';
-// $db   = 'aushvera';
-// $user = 'root';
-// $pass = '';
+$host = 'localhost';
+$db   = 'aushvera';
+$user = 'root';
+$pass = '';
 
-$host = 'sql200.infinityfree.com';
-$db   = 'if0_40471593_aushvera';
-$user = 'if0_40471593';
-$pass = 'rajrathod8732t';
+
+//main credential
+// $host = 'sql200.infinityfree.com';
+// $db   = 'if0_40471593_aushvera';
+// $user = 'if0_40471593';
+// $pass = 'rajrathod8732t';
+
+
+// $host = 'sql213.infinityfree.com';
+// $db   = 'if0_40514527_aushvera';
+// $user = 'if0_40514527';
+// $pass = 'raj8732t';
 
 $conn = new mysqli($host, $user, $pass, $db);
 

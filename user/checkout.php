@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout | Ayushvera - Premium Herbal Products</title>
 
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <!-- fevicon icon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
@@ -588,6 +589,18 @@
     </div>
   </header>
 
+    <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden flex-col gap-4  bg-white text-black px-4 py-5 lg:hidden"
+  >
+    <a href="./index.html" class="block text-black py-2  border-b border-gray-700">Home</a>
+    <a href="./product.html" class="block text-black py-2 border-b border-gray-700">Products</a>
+    <a href="./aboutus.html" class="block text-black py-2 border-b border-gray-700">About Us</a>
+    <a href="./contactus.html" class="block text-black py-2 border-b border-gray-700">Contact</a>
+    <a href="./happy_customer.html" class="block text-black py-2 border-b border-gray-700">Happy Customer</a>
+  </div>
+
   <!-- Checkout Hero -->
   <section class="checkout-hero">
     <div class="container">
@@ -703,6 +716,15 @@
       const params = new URLSearchParams(window.location.search);
       return params.get(name);
     }
+
+    // Mobile menu toggle
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("flex");
+    });
 
     // --- Buy Now logic ---
     async function loadBuyNowOrder() {

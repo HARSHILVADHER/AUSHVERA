@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Aushvera Customer Review</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- fevicon icon -->
@@ -110,6 +110,18 @@
         </div>
     </header>
 
+      <!-- Mobile Menu -->
+    <div
+        id="mobile-menu"
+        class="hidden flex-col gap-4  bg-white text-black px-4 py-5  lg:hidden"
+    >
+        <a href="./index.html" class="block text-black py-2  border-b border-gray-700">Home</a>
+        <a href="./product.html" class="block text-black py-2 border-b border-gray-700">Products</a>
+        <a href="./aboutus.html" class="block text-black py-2 border-b border-gray-700">About Us</a>
+        <a href="./contactus.html" class="block text-black py-2 border-b border-gray-700">Contact</a>
+        <a href="./happy_customer.html" class="block text-black py-2 border-b border-gray-700">Happy Customer</a>
+    </div>
+
     <div class="max-w-full mx-auto bg-blue-[#071b42]" >
         <!-- Reviews Section -->
         <div  class="  mb-4 w-full py-20 flex justify-center bg-[#071b42] text-white items-center ">
@@ -132,6 +144,15 @@
       duration: 800,
       easing: 'ease-in-out',
       once: true
+    });
+
+    // Mobile menu toggle
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("flex");
     });
 
     async function loadReviews() {
