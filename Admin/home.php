@@ -1,9 +1,21 @@
+<?php
+ require_once "./php/auth_check.php"
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aushvera Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- fevicon icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest"> 
+  
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -35,6 +47,11 @@
         display: flex;
         background-color: var(--light-bg);
         color: var(--dark-text);
+      }
+
+      .logo img {
+        height: 40px;
+        transition: var(--transition);
       }
 
       /* Sidebar Styles */
@@ -153,359 +170,458 @@
         margin-bottom: 30px;
       }
 
-.card {
-      background: white;
-      padding: 20px;
-      flex: 1;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .products-table {
-      margin-top: 30px;
-      background: white;
-      padding: 20px;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-    th {
-      background-color: #f5f5f5;
-    }
-    .btn-primary {
-      background-color: var(--secondary);
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .hidden {
-      display: none;
-    }
       .card {
-        background-color: var(--white);
-        border-radius: 8px;
+        background: white;
         padding: 20px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        flex: 1;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       }
-
-      .card h3 {
-        font-size: 14px;
-        color: #666;
-        margin-bottom: 10px;
-      }
-
-      .card p {
-        font-size: 24px;
-        font-weight: 600;
-      }
-
-      /* Products Table */
       .products-table {
-        background-color: var(--white);
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        overflow: hidden;
+        margin-top: 30px;
+        background: white;
+        padding: 20px;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       }
-
       table {
         width: 100%;
         border-collapse: collapse;
       }
-
-      th,
-      td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid var(--gray);
+      th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
       }
-
       th {
-        background-color: #f9f9f9;
-        font-weight: 600;
+        background-color: #f5f5f5;
       }
-
-      .product-thumbnail {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 4px;
-      }
-
-      .status {
-        display: inline-block;
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 500;
-      }
-
-      .status-active {
-        background-color: rgba(46, 204, 113, 0.2);
-        color: var(--success);
-      }
-
-      .status-out-of-stock {
-        background-color: rgba(231, 76, 60, 0.2);
-        color: var(--danger);
-      }
-
-      .action-btn {
-        padding: 5px 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-right: 5px;
-        transition: all 0.3s;
-      }
-
-      .edit-btn {
-        background-color: rgba(26, 42, 74, 0.1);
-        color: var(--primary);
-      }
-
-      .edit-btn:hover {
-        background-color: rgba(26, 42, 74, 0.2);
-      }
-
-      .delete-btn {
-        background-color: rgba(231, 76, 60, 0.1);
-        color: var(--danger);
-      }
-
-      .delete-btn:hover {
-        background-color: rgba(231, 76, 60, 0.2);
-      }
-
-      /* Modal Styles */
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .modal-content {
-        background-color: var(--white);
-        border-radius: 8px;
-        width: 80%;
-        max-width: 800px;
-        max-height: 90vh;
-        overflow-y: auto;
-        padding: 30px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      }
-
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-        border-bottom: 1px solid var(--gray);
-      }
-
-      .modal-header h2 {
-        font-size: 20px;
-        color: var(--primary);
-      }
-
-      .close-btn {
-        background: none;
-        border: none;
-        font-size: 24px;
-        cursor: pointer;
-        color: #666;
-      }
-
-      .form-group {
-        margin-bottom: 20px;
-      }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 500;
-      }
-
-      .form-control {
-        width: 100%;
-        padding: 10px 15px;
-        border: 1px solid var(--gray);
-        border-radius: 4px;
-        font-size: 14px;
-      }
-
-      .form-row {
-        display: flex;
-        gap: 20px;
-      }
-
-      .form-col {
-        flex: 1;
-      }
-
-      .image-upload {
-        border: 2px dashed var(--gray);
-        border-radius: 8px;
-        padding: 30px;
-        text-align: center;
-        cursor: pointer;
-        margin-bottom: 15px;
-      }
-
-      .image-upload:hover {
-        border-color: var(--secondary);
-      }
-
-      .image-preview {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 15px;
-      }
-
-      .preview-item {
-        position: relative;
-        width: 80px;
-        height: 80px;
-      }
-
-      .preview-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 4px;
-      }
-
-      .preview-item .remove-btn {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background-color: var(--danger);
+      .btn-primary {
+        background-color: var(--secondary);
         color: white;
+        padding: 10px 15px;
         border: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        border-radius: 4px;
         cursor: pointer;
-        font-size: 10px;
       }
-
-      .modal-footer {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 30px;
-        padding-top: 20px;
-        border-top: 1px solid var(--gray);
+      .hidden {
+        display: none;
       }
+        .card {
+          background-color: var(--white);
+          border-radius: 8px;
+          padding: 20px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
 
-      .btn-secondary {
-        background-color: var(--gray);
-        color: var(--dark-text);
-      }
+        .card h3 {
+          font-size: 14px;
+          color: #666;
+          margin-bottom: 10px;
+        }
 
-      .btn-secondary:hover {
-        background-color: #d0d0d0;
-      }
+        .card p {
+          font-size: 24px;
+          font-weight: 600;
+        }
 
-      /* Responsive Styles */
-      @media (max-width: 992px) {
-        .sidebar {
-          width: 80px;
+        /* Products Table */
+        .products-table {
+          background-color: var(--white);
+          border-radius: 8px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
           overflow: hidden;
         }
 
-        .sidebar-header h2,
-        .sidebar-menu a span {
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+
+        th,
+        td {
+          padding: 15px;
+          text-align: left;
+          border-bottom: 1px solid var(--gray);
+        }
+
+        th {
+          background-color: #f9f9f9;
+          font-weight: 600;
+        }
+
+        .product-thumbnail {
+          width: 50px;
+          height: 50px;
+          object-fit: cover;
+          border-radius: 4px;
+        }
+
+        .status {
+          display: inline-block;
+          padding: 5px 10px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 500;
+        }
+
+        .status-active {
+          background-color: rgba(46, 204, 113, 0.2);
+          color: var(--success);
+        }
+
+        .status-out-of-stock {
+          background-color: rgba(231, 76, 60, 0.2);
+          color: var(--danger);
+        }
+
+        .action-btn {
+          padding: 5px 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-right: 5px;
+          transition: all 0.3s;
+        }
+
+        .edit-btn {
+          background-color: rgba(26, 42, 74, 0.1);
+          color: var(--primary);
+        }
+
+        .edit-btn:hover {
+          background-color: rgba(26, 42, 74, 0.2);
+        }
+
+        .delete-btn {
+          background-color: rgba(231, 76, 60, 0.1);
+          color: var(--danger);
+        }
+
+        .delete-btn:hover {
+          background-color: rgba(231, 76, 60, 0.2);
+        }
+            /* Settings Section Styles */
+        .settings-content {
+          margin-top: 20px;
+        }
+
+        .settings-group {
+          margin-bottom: 40px;
+        }
+
+        .settings-group h3 {
+          color: var(--primary);
+          font-size: 1.3rem;
+          margin-bottom: 20px;
+          padding-bottom: 10px;
+          border-bottom: 2px solid var(--secondary);
+        }
+
+        .settings-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px;
+          border: 1px solid #eee;
+          border-radius: 10px;
+          margin-bottom: 15px;
+          transition: var(--transition);
+        }
+
+        .settings-item:hover {
+          box-shadow: var(--shadow-sm);
+          border-color: var(--secondary);
+        }
+
+        .settings-info h4 {
+          color: var(--primary);
+          margin-bottom: 5px;
+          font-size: 1.1rem;
+        }
+
+        .settings-info p {
+          color: #666;
+          margin-bottom: 0;
+          font-size: 0.9rem;
+        }
+
+        .settings-action {
+          display: flex;
+          align-items: center;
+        }
+
+        .btn-danger {
+          background: #dc3545;
+          color: white;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 25px;
+          font-weight: 600;
+          transition: var(--transition);
+        }
+
+        .btn-danger:hover {
+          background: #c82333;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-sm);
+        }
+
+        .btn-outline-primary {
+          background: transparent;
+          color: var(--primary);
+          border: 2px solid var(--primary);
+          padding: 10px 20px;
+          border-radius: 25px;
+          font-weight: 600;
+          transition: var(--transition);
+        }
+
+        .btn-outline-primary:hover {
+          background: var(--primary);
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-sm);
+        }
+
+        .btn-outline-danger {
+          background: transparent;
+          color: #dc3545;
+          border: 2px solid #dc3545;
+          padding: 10px 20px;
+          border-radius: 25px;
+          font-weight: 600;
+          transition: var(--transition);
+        }
+
+        .btn-outline-danger:hover {
+          background: #dc3545;
+          color: white;
+          transform: translateY(-2px);
+          box-shadow: var(--shadow-sm);
+        }
+
+        /* Modal Styles */
+        .modal {
           display: none;
-        }
-
-        .sidebar-menu a {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 1000;
           justify-content: center;
-          padding: 12px 0;
-        }
-
-        .sidebar-menu i {
-          margin-right: 0;
-          font-size: 20px;
-        }
-
-        .main-content {
-          margin-left: 80px;
-          width: calc(100% - 80px);
-        }
-      }
-
-      @media (max-width: 768px) {
-        .summary-cards {
-          grid-template-columns: 1fr;
-        }
-
-        .form-row {
-          flex-direction: column;
-          gap: 0;
+          align-items: center;
         }
 
         .modal-content {
-          width: 95%;
-          padding: 20px;
+          background-color: var(--white);
+          border-radius: 8px;
+          width: 80%;
+          max-width: 800px;
+          max-height: 90vh;
+          overflow-y: auto;
+          padding: 30px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-      }
 
-      .existing-images {
-        margin-top: 15px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
+        .modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+          padding-bottom: 15px;
+          border-bottom: 1px solid var(--gray);
+        }
 
-      .existing-image-item {
-        position: relative;
-        width: 80px;
-        height: 80px;
-      }
+        .modal-header h2 {
+          font-size: 20px;
+          color: var(--primary);
+        }
 
-      .existing-image-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 4px;
-      }
+        .close-btn {
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          color: #666;
+        }
 
-      .existing-image-item .remove-btn {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background-color: var(--danger);
-        color: white;
-        border: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-size: 10px;
-      }
+        .form-group {
+          margin-bottom: 20px;
+        }
+
+        .form-group label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 500;
+        }
+
+        .form-control {
+          width: 100%;
+          padding: 10px 15px;
+          border: 1px solid var(--gray);
+          border-radius: 4px;
+          font-size: 14px;
+        }
+
+        .form-row {
+          display: flex;
+          gap: 20px;
+        }
+
+        .form-col {
+          flex: 1;
+        }
+
+        .image-upload {
+          border: 2px dashed var(--gray);
+          border-radius: 8px;
+          padding: 30px;
+          text-align: center;
+          cursor: pointer;
+          margin-bottom: 15px;
+        }
+
+        .image-upload:hover {
+          border-color: var(--secondary);
+        }
+
+        .image-preview {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 15px;
+        }
+
+        .preview-item {
+          position: relative;
+          width: 80px;
+          height: 80px;
+        }
+
+        .preview-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 4px;
+        }
+
+        .preview-item .remove-btn {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          background-color: var(--danger);
+          color: white;
+          border: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          font-size: 10px;
+        }
+
+        .modal-footer {
+          display: flex;
+          justify-content: flex-end;
+          gap: 10px;
+          margin-top: 30px;
+          padding-top: 20px;
+          border-top: 1px solid var(--gray);
+        }
+
+        .btn-secondary {
+          background-color: var(--gray);
+          color: var(--dark-text);
+        }
+
+        .btn-secondary:hover {
+          background-color: #d0d0d0;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+          .sidebar {
+            width: 80px;
+            overflow: hidden;
+          }
+
+          .sidebar-header h2,
+          .sidebar-menu a span {
+            display: none;
+          }
+
+          .sidebar-menu a {
+            justify-content: center;
+            padding: 12px 0;
+          }
+
+          .sidebar-menu i {
+            margin-right: 0;
+            font-size: 20px;
+          }
+
+          .main-content {
+            margin-left: 80px;
+            width: calc(100% - 80px);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .summary-cards {
+            grid-template-columns: 1fr;
+          }
+
+          .form-row {
+            flex-direction: column;
+            gap: 0;
+          }
+
+          .modal-content {
+            width: 95%;
+            padding: 20px;
+          }
+        }
+
+        .existing-images {
+          margin-top: 15px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .existing-image-item {
+          position: relative;
+          width: 80px;
+          height: 80px;
+        }
+
+        .existing-image-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 4px;
+        }
+
+        .existing-image-item .remove-btn {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          background-color: var(--danger);
+          color: white;
+          border: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          font-size: 10px;
+        }
     </style>
   </head>
   <body>
@@ -514,7 +630,9 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-header">
-      <i class="fas fa-store" style="font-size: 24px; color: var(--secondary)"></i>
+      <div class="logo">
+        <img src="./images/logo bg.png" alt="Ayushvera Logo" />
+      </div>
       <h2>Aushvera</h2>
     </div>
     <ul class="sidebar-menu">
@@ -546,7 +664,7 @@
     </div>
 
     <!-- Summary Cards -->
-    <div class="summary-cards">
+    <div class="summary-cards" id="summary-cards">
       <div class="card">
         <h3>Total Products</h3>
         <p id="totalProducts">24</p>
@@ -635,25 +753,145 @@
         <tbody id="feedbackTableBody"></tbody>
       </table>
     </div>
+
+    <!-- DASHBOARD SECTION -->
+    <section id="dashboard-section" class="hidden p-6 bg-gray-50 min-h-screen">
+
+      <!-- Top Heading -->
+      <h1 class="text-3xl font-bold mb-6 text-gray-800">Dashboard Overview</h1>
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+
+        <!-- CARD 1 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+          <p class="text-gray-500 text-sm">Active Products</p>
+          <h2 id="active_products" class="text-3xl font-bold mt-2">0</h2>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+          <p class="text-gray-500 text-sm">Unactive Products</p>
+          <h2 id="un_active_products" class="text-3xl font-bold mt-2">0</h2>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+          <p class="text-gray-500 text-sm">Out of Stock</p>
+          <h2 id="out_of_stock" class="text-3xl font-bold mt-2">0</h2>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+          <p class="text-gray-500 text-sm">Revenue</p>
+          <h2 id="totalIncome" class="text-3xl font-bold mt-2">₹0</h2>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+          <p class="text-gray-500 text-sm">Total Users</p>
+          <h2 id="totalUsers" class="text-3xl font-bold mt-2">0</h2>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+          <p class="text-gray-500 text-sm">Total Orders</p>
+          <h2 id="totalOrders" class="text-3xl font-bold mt-2">0</h2>
+        </div>
+
+        <!-- CARD 7 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+          <p class="text-gray-500 text-sm">Pending Orders</p>
+          <h2 id="pendingOrders" class="text-3xl font-bold mt-2">0</h2>
+        </div>
+
+        <!-- CARD 8 -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+          <p class="text-gray-500 text-sm">Completed Orders</p>
+          <h2 id="completedOrders" class="text-3xl font-bold mt-2">0</h2>
+        </div>
+
+
+      </div>
+    </section>
+  
+    <!-- setting section -->
+    <div id="settings" class="profile-section" style="display: none;">
+        <div class="section-title">
+          <h2>Account Settings</h2>
+        </div>
+
+        <div class="settings-content">
+          <div class="settings-group">
+            <h3>Account Management</h3>
+            <div class="settings-item">
+              <div class="settings-info">
+                <h4>Logout</h4>
+                <p>Sign out of your account and return to login page</p>
+              </div>
+              <div class="settings-action">
+                <button class="btn btn-danger" id="logoutBtn" onclick="logout(); return false;">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+              </div>
+            </div>
+            
+            <div class="settings-item">
+              <div class="settings-info">
+                <h4>Change Password</h4>
+                <p>Update your account password for better security</p>
+              </div>
+              <div class="settings-action">
+                <button class="btn btn-outline-primary" onclick="showChangePasswordForm(); return false;">
+                  <i class="fas fa-key"></i> Change Password
+                </button>
+              </div>
+            </div>
+            
+            <div class="settings-item">
+              <div class="settings-info">
+                <h4>Delete Account</h4>
+                <p>Permanently delete your account and all associated data</p>
+              </div>
+              <div class="settings-action">
+                <button class="btn btn-outline-danger" onclick="showDeleteAccountModal(); return false;">
+                  <i class="fas fa-trash"></i> Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  
   </div>
+
+
 
   <!-- Script Section -->
   <script>
     function loadOrders() {
+      
       fetch("php/fetch_orders.php")
         .then(res => res.json())
         .then(data => {
           const tbody = document.getElementById("ordersTableBody");
           tbody.innerHTML = "";
+          console.log(data)
           if (data.success) {
             data.orders.forEach(order => {
+              
+              const productList = order.products
+                .map(p => `${p.name} (x${p.quantity})`)
+                .join("<br>");
+
               const row = document.createElement("tr");
               row.innerHTML = `
                 <td>${order.order_id}</td>
                 <td>${order.customer_name}</td>
                 <td>${order.customer_email}</td>
                 <td>${order.customer_phone}</td>
-                <td>${order.product_name}</td>
+                <td>${productList}</td>
                 <td>₹${parseFloat(order.total_amount).toFixed(2)}</td>
                 <td>${order.status}</td>
                 <td>${new Date(order.ordered_date).toLocaleString()}</td>
@@ -709,34 +947,70 @@
         });
     }
 
+    async function loadDashboard(){
+      try{
+        const res = await fetch("./php/dashboard.php");
+        const data = await res.json();
+
+        document.getElementById("totalProducts").innerText = data.total_products;
+        document.getElementById("totalUsers").innerText = data.total_users;
+        document.getElementById("totalOrders").innerText = data.total_orders;
+        document.getElementById("completedOrders").innerText = data.completed_orders;
+        document.getElementById("pendingOrders").innerText = data.pending_orders;
+        document.getElementById("totalIncome").innerText = "₹" + data.total_income;
+        document.getElementById("out_of_stock").innerText = data.out_of_stock;
+        document.getElementById("un_active_products").innerText = data.unActive_products;
+        document.getElementById("active_products").innerText = data.active_products;
+      } catch (error) {
+        console.log("Dashboard Error:", error);
+      }
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       const sidebarLinks = document.querySelectorAll(".sidebar-menu a");
       const productsSection = document.getElementById("products-section");
       const customerSection = document.getElementById("customer-section");
       const ordersSection = document.getElementById("orders-section");
       const feedbackSection = document.getElementById("feedback-section");
+      const dashboardSection = document.getElementById("dashboard-section");
+      const summaryCard = document.getElementById("summary-cards");
+      const settings = document.getElementById("settings");
+       // hide summary on dashboard
 
       sidebarLinks.forEach(link => {
         link.addEventListener("click", function (e) {
           e.preventDefault();
           const text = this.textContent.trim().toLowerCase();
-
+          console.log("text" , text);
           productsSection.style.display = "none";
           customerSection.style.display = "none";
           ordersSection.style.display = "none";
           feedbackSection.style.display = "none";
+          dashboardSection.style.display = "none";
+          settings.style.display = "none";
+          summaryCard.classList.remove("hidden");
 
           if (text === "products") {
             productsSection.style.display = "block";
           } else if (text === "customers") {
+            summaryCard.classList.add("hidden"); // hide summary on dashboard
             customerSection.style.display = "block";
             loadCustomers();
           } else if (text === "orders") {
             ordersSection.style.display = "block";
             loadOrders();
           } else if (text === "feedback") {
+            summaryCard.classList.add("hidden"); // hide summary on dashboard
             feedbackSection.style.display = "block";
             loadFeedback();
+          }else if (text === "dashboard") {
+            
+            dashboardSection.style.display = "block";
+            summaryCard.classList.add("hidden"); // hide summary on dashboard
+            loadDashboard();
+          }else if(text=== "settings"){
+            summaryCard.classList.add("hidden"); // hide summary on dashboard
+            settings.style.display = "block";
           }
 
           sidebarLinks.forEach(l => l.classList.remove("active"));
@@ -744,6 +1018,42 @@
         });
       });
     });
+
+    // Logout functionality
+    async function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        try {
+          const response = await fetch('../user/php/logout.php', {
+            method: 'POST',
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin'
+          });
+          
+          const data = await response.json();
+        if (data.success) {
+          window.location.href = '../user/login.html';
+        } else {
+            throw new Error(data.message || 'Logout failed');
+        }
+      } catch (error) {
+        console.error('Error during logout:', error);
+        // Fallback: redirect anyway
+          alert('Logging out...');
+        window.location.href = 'login.html';
+        }
+      }
+    }
+
+    // Settings functions
+    function showChangePasswordForm() {
+      window.location.href = "../user/forgot-password.html";
+    }
+
+    async function showDeleteAccountModal() {
+      alert("admin account can`t be deleted. ");
+    }
   </script>
 
     <!-- Add Product Modal -->

@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // s = string, d = double, i = integer
         $stmt->bind_param(
-            "sssddsdssssssss",
+            "sssddidssssssss",
             $name,
             $category,
             $description,

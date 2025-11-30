@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us | Ayushvera - Premium Herbal Products</title>
+  <title>About Us | Aushvera - Premium Herbal Products</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- fevicon icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest"> 
   
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -614,22 +621,34 @@
       <a href="index.html" class="nav-link">Home</a>
       <a href="product.html" class="nav-link">Products</a>
       <a href="aboutus.html" class="nav-link active">About Us</a>
-      <a href="#" class="nav-link">Contact</a>
-      <a href="#" class="nav-link">Shop Now</a>
+      <a href="contactus.html" class="nav-link">Contact</a>
+      <a href="happy_customer.html" class="nav-link">Happy Customer</a>
     </nav>
     <div class="icons">
-      <button class="btn btn-outline-secondary me-2"><i class="fas fa-shopping-bag"></i></button>
-      <button class="btn btn-outline-secondary"><i class="fas fa-user"></i></button>
+      <button onclick="window.location.href='cart.php'" class="btn btn-outline-secondary me-2"><i class="fas fa-shopping-bag"></i></button>
+      <button onclick="window.location.href='profile.php'" class="btn btn-outline-secondary"><i class="fas fa-user"></i></button>
       <button class="btn btn-outline-secondary d-lg-none ms-2" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </div>
   </header>
+
+    <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden flex-col gap-4  bg-white text-black px-4 py-5 lg:hidden"
+  >
+    <a href="./index.html" class="block text-black py-2  border-b border-gray-700">Home</a>
+    <a href="./product.html" class="block text-black py-2 border-b border-gray-700">Products</a>
+    <a href="./aboutus.html" class="block text-black py-2 border-b border-gray-700">About Us</a>
+    <a href="./contactus.html" class="block text-black py-2 border-b border-gray-700">Contact</a>
+    <a href="./happy_customer.html" class="block text-black py-2 border-b border-gray-700">Happy Customer</a>
+  </div>
 
   <!-- Hero Banner -->
   <section class="about-hero">
     <div class="container">
       <div class="hero-content" data-aos="fade-up">
         <h1 class="hero-title">Our Story</h1>
-        <p class="hero-subtitle">Discover the journey of Ayushvera and our commitment to bringing authentic Ayurvedic wellness to your life.</p>
+        <p class="hero-subtitle">Discover the journey of Aushvera and our commitment to bringing authentic Ayurvedic wellness to your life.</p>
       </div>
     </div>
   </section>
@@ -645,8 +664,8 @@
         </div>
         <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
           <div class="about-content">
-            <h2>About Ayushvera</h2>
-            <p>Ayushvera Globalbiz was founded with a vision to bridge the gap between ancient Ayurvedic wisdom and modern wellness needs. Our journey began in the heart of Gujarat, India, where our founder Nikunj Makwana discovered the transformative power of herbal remedies passed down through generations.</p>
+            <h2>About Aushvera</h2>
+            <p>Aushvera Globalbiz was founded with a vision to bridge the gap between ancient Ayurvedic wisdom and modern wellness needs. Our journey began in the heart of Gujarat, India, where our founder Nikunj Makwana discovered the transformative power of herbal remedies passed down through generations.</p>
             <p>Today, we've grown into a trusted brand that combines traditional Ayurvedic knowledge with scientific validation to create premium herbal products that truly work. Every ingredient we use is carefully selected for its purity and potency, ensuring you receive nature's best.</p>
             <p>What sets us apart is our commitment to authenticity. We don't just sell products - we share a legacy of wellness that has been perfected over centuries. Our formulations are created under the guidance of experienced Ayurvedic practitioners and validated through modern testing methods.</p>
           </div>
@@ -690,7 +709,7 @@
               <i class="fas fa-hand-holding-heart"></i>
             </div>
             <h3 class="mission-title">Our Promise</h3>
-            <p>Every Ayushvera product is crafted with care, using only the finest natural ingredients. We promise purity, potency, and effectiveness in every formulation, backed by rigorous testing and quality control.</p>
+            <p>Every Aushvera product is crafted with care, using only the finest natural ingredients. We promise purity, potency, and effectiveness in every formulation, backed by rigorous testing and quality control.</p>
           </div>
         </div>
       </div>
@@ -782,89 +801,6 @@
   </section>
 
   <!-- Team Section -->
-  <section class="team-section">
-    <div class="container">
-      <div class="section-title" data-aos="fade-up">
-        <h2>Meet Our Team</h2>
-        <div class="divider"></div>
-        <p>The passionate individuals behind Ayushvera's success</p>
-      </div>
-      
-      <div class="row">
-        <!-- Team Member 1 -->
-        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="100">
-          <div class="team-member">
-            <div class="team-img">
-              <img src="Images/team1.png" alt="Nikunj Makwana">
-              <div class="team-social">
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-              </div>
-            </div>
-            <div class="team-info">
-              <h4>Nikunj Makwana</h4>
-              <p>Founder & CEO</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Team Member 2 -->
-        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="200">
-          <div class="team-member">
-            <div class="team-img">
-              <img src="Images/team2.png" alt="Ravi">
-              <div class="team-social">
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-              </div>
-            </div>
-            <div class="team-info">
-              <h4>Ravi</h4>
-              <p>Chief Financial Officer</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Team Member 3 -->
-        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="300">
-          <div class="team-member">
-            <div class="team-img">
-              <img src="Images/harshil.jpg" alt="Harshil Vadher">
-              <div class="team-social">
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-              </div>
-            </div>
-            <div class="team-info">
-              <h4>Vadher Harshil</h4>
-              <p>Web Developer</p>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Team Member 4 -->
-        <div class="col-lg-3 col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="400">
-          <div class="team-member">
-            <div class="team-img">
-              <img src="Images/akash.jpg" alt="Akash Chudasama">
-              <div class="team-social">
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-              </div>
-            </div>
-            <div class="team-info">
-              <h4>Akash Chudasama</h4>
-              <p>Web Developer</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- CTA Section -->
   <section class="cta-section">
@@ -872,7 +808,7 @@
       <div class="section-title light" data-aos="fade-up">
         <h2>Ready to Experience Ayurvedic Wellness?</h2>
         <div class="divider"></div>
-        <p>Join thousands of satisfied customers who have transformed their health with Ayushvera</p>
+        <p>Join thousands of satisfied customers who have transformed their health with Aushvera</p>
       </div>
       
       <div class="cta-buttons" data-aos="fade-up" data-aos-delay="100">
@@ -957,11 +893,12 @@
     });
     
     // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-      mobileMenu.classList.toggle('show');
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("flex");
     });
     
     // Add smooth scrolling to all links

@@ -1,9 +1,20 @@
+<?php
+ require_once "../auth_check.php"
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shopping Cart - Ayushvera</title>
+  <title>Shopping Cart - Aushvera</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- fevicon icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest"> 
   
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -507,18 +518,31 @@
       <a href="product.html" class="nav-link">Products</a>
       <a href="aboutus.html" class="nav-link">About Us</a>
       <a href="contactus.html" class="nav-link">Contact</a>
+      <a href="happy_customer.html" class="nav-link">Happy Customer</a>
     </nav>
     <div class="icons">
-      <a href="cart.html" class="btn btn-outline-secondary me-2 position-relative">
+      <a href="cart.php" class="btn btn-outline-secondary me-2 position-relative">
         <i class="fas fa-shopping-bag"></i>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count" style="display: none;">
           0
         </span>
       </a>
-      <a href="profile.html" class="btn btn-outline-secondary"><i class="fas fa-user"></i></a>
+      <a href="profile.php" class="btn btn-outline-secondary"><i class="fas fa-user"></i></a>
       <button class="btn btn-outline-secondary d-lg-none ms-2" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </div>
   </header>
+
+    <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden flex-col gap-4  bg-white text-black px-4 py-5  lg:hidden"
+  >
+    <a href="./index.html" class="block text-black py-2  border-b border-gray-700">Home</a>
+    <a href="./product.html" class="block text-black py-2 border-b border-gray-700">Products</a>
+    <a href="./aboutus.html" class="block text-black py-2 border-b border-gray-700">About Us</a>
+    <a href="./contactus.html" class="block text-black py-2 border-b border-gray-700">Contact</a>
+    <a href="./happy_customer.html" class="block text-black py-2 border-b border-gray-700">Happy Customer</a>
+  </div>
 
   <!-- Cart Hero -->
   <section class="cart-hero">
@@ -568,11 +592,11 @@
             </div>
 
             <!-- Coupon Section -->
-            <div class="coupon-section">
+            <div class="coupon-section flex flex-col w-full">
               <h5>Have a coupon?</h5>
               <div class="coupon-input">
-                <input type="text" id="coupon-code" placeholder="Enter coupon code">
-                <button class="apply-coupon-btn" onclick="applyCoupon()">Apply</button>
+                <input type="text" id="coupon-code " class="md:w-40 " placeholder="Enter coupon code">
+                <button class="apply-coupon-btn w-auto md:w-10" onclick="applyCoupon()">Apply</button>
               </div>
               <div id="coupon-message" class="coupon-message"></div>
             </div>
@@ -600,6 +624,15 @@
     // Load cart items on page load
     document.addEventListener('DOMContentLoaded', function() {
       loadCartItems();
+    });
+
+    // Mobile menu toggle
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("flex");
     });
 
     // Load cart items from database
@@ -836,7 +869,7 @@
       
       // Here you would redirect to checkout page
       alert('Proceeding to checkout...');
-      window.location.href = 'checkout.html';
+      window.location.href = 'checkout.php';
     }
 
     // Function to add item to cart (called from other pages)

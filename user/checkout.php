@@ -1,10 +1,23 @@
+<?php
+ require_once "../auth_check.php";
+ require_once "./php/r_config.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout | Ayushvera - Premium Herbal Products</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- fevicon icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest"> 
   
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   
@@ -567,14 +580,26 @@
       <a href="product.html" class="nav-link">Products</a>
       <a href="aboutus.html" class="nav-link">About Us</a>
       <a href="contact.html" class="nav-link">Contact</a>
-      <a href="#" class="nav-link">Shop Now</a>
+      <a href="happy_customer.html" class="nav-link">Happy Customer</a>
     </nav>
     <div class="icons">
-      <a href="cart.html" class="btn btn-outline-secondary me-2"><i class="fas fa-shopping-bag"></i></a>
-      <button class="btn btn-outline-secondary"><i class="fas fa-user"></i></button>
+      <a href="cart.php" class="btn btn-outline-secondary me-2"><i class="fas fa-shopping-bag"></i></a>
+      <button onclick="window.location.href='profile.php'" class="btn btn-outline-secondary"><i class="fas fa-user"></i></button>
       <button class="btn btn-outline-secondary d-lg-none ms-2" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </div>
   </header>
+
+    <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden flex-col gap-4  bg-white text-black px-4 py-5 lg:hidden"
+  >
+    <a href="./index.html" class="block text-black py-2  border-b border-gray-700">Home</a>
+    <a href="./product.html" class="block text-black py-2 border-b border-gray-700">Products</a>
+    <a href="./aboutus.html" class="block text-black py-2 border-b border-gray-700">About Us</a>
+    <a href="./contactus.html" class="block text-black py-2 border-b border-gray-700">Contact</a>
+    <a href="./happy_customer.html" class="block text-black py-2 border-b border-gray-700">Happy Customer</a>
+  </div>
 
   <!-- Checkout Hero -->
   <section class="checkout-hero">
@@ -684,6 +709,7 @@
     let selectedAddress = null;
     let selectedPayment = null;
     let userAddresses = [];
+    let total_amount = 0;
 
     // Helper: get URL param
     function getUrlParam(name) {
@@ -691,34 +717,52 @@
       return params.get(name);
     }
 
+    // Mobile menu toggle
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("flex");
+    });
+
     // --- Buy Now logic ---
     async function loadBuyNowOrder() {
       try {
         const response = await fetch('php/get_buynow_order.php');
         const order = await response.json();
-        if (order && !order.error) {
-          let imageName = 'tea1.png';
-          if (order.images) {
-            if (Array.isArray(order.images)) {
-              imageName = order.images.length ? order.images[0] : 'tea1.png';
-            } else if (typeof order.images === 'string') {
-              imageName = order.images.split(',')[0].trim();
-            }
-          }
-          cartItems = [{
-            id: order.product_id,
-            name: order.name,
-            price: order.price,
-            quantity: order.quantity,
-            image: imageName,
-            description: order.description
-          }];
-          displayCartItems();
-          updateOrderSummary();
-        } else {
-          document.getElementById('cartItems').innerHTML = `<div class="text-center py-4"><h4>No Buy Now order found</h4></div>`;
-          document.getElementById('orderSummary').innerHTML = '';
+        const imageName = order.images[0];
+
+        if (!order) {
+          document.getElementById('cartItems').innerHTML =
+            `<div class="text-center py-4"><h4>No Buy Now order found</h4></div>`;
+          return;
         }
+
+        // Always safe image extraction
+          // let imageName = 'tea1.png';
+
+          // if (order.images) {
+          //   if (Array.isArray(order.images)) {
+          //     imageName = order.images[0] || 'tea1.png';
+          //   } else if (typeof order.images === 'string') {
+          //     imageName = order.images.split(',')[0].trim();
+          //   }
+          // }
+
+        // Build cartItems exactly how your displayCartItems expects
+        cartItems = [{
+          product_id: order.product_id,       // product id
+          name: order.name,
+          price: Number(order.price), // convert from string to number
+          quantity: order.quantity,
+          image: imageName,
+          description: order.description
+        }];
+
+        displayCartItems();
+        updateOrderSummary();
+
       } catch (error) {
         document.getElementById('cartItems').innerHTML = `<div class="text-center py-4"><h4>Failed to load Buy Now order</h4></div>`;
         document.getElementById('orderSummary').innerHTML = '';
@@ -950,7 +994,7 @@
 
       const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
       const shipping = subtotal > 500 ? 0 : 50; // Free shipping above ₹500
-      const total = subtotal + shipping;
+      total_amount = subtotal + shipping;
 
       summaryContainer.innerHTML = `
         <div class="summary-item">
@@ -963,7 +1007,7 @@
         </div>
         <div class="summary-item summary-total">
           <span>Total</span>
-          <span>₹${total.toFixed(2)}</span>
+          <span>₹${total_amount.toFixed(2)}</span>
         </div>
       `;
     }
@@ -988,12 +1032,134 @@
     function showAddAddressModal() {
       // For now, redirect to profile page to add address
       if (confirm('Would you like to add a new address? You will be redirected to your profile page.')) {
-        window.location.href = 'profile.html#addresses';
+        window.location.href = 'profile.php';
       }
     }
 
+    function placeOrder() {
+      if (!selectedPayment) {
+          alert("Please select a payment method!");
+          return;
+      }
+
+      // COD → directly place order
+      if (selectedPayment === "cod") {
+          placeCODOrder();
+          return;
+      }
+
+      // UPI OR CARD → Open Razorpay
+      if (selectedPayment === "upi" || selectedPayment === "card") {
+          placeCODOrder();
+          // openRazorpay();
+          return;
+      }
+    }
+
+    // handle rozarpay order
+    async function openRazorpay() {
+      if (!selectedAddress || !selectedPayment) {
+        alert('Please select both delivery address and payment method');
+        return;
+      }
+
+      if (cartItems.length === 0) {
+        alert('Your cart is empty');
+        return;
+      }
+
+
+      console.log("Total Price:", total_amount);
+
+      if (!total_amount || total_amount <= 0) { alert('Enter valid amount'); return; }
+
+      // 1) Create order on server
+      const createResp = await fetch('./php/create_order.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: total_amount })
+      });
+
+      const createData = await createResp.json();
+      if (!createData.success) {
+        alert('Failed to create order: ' + (createData.message || JSON.stringify(createData)));
+        return;
+      }
+      const order = createData.order;
+
+      // 2) Open Razorpay Checkout
+      const options = {
+        "key": "", // not allowed in static html; we'll fetch key below
+        "amount": order.amount, // in paise
+        "currency": order.currency,
+        "name": "Ayushvera",
+        "description": "Order Payment",
+        "order_id": order.id, // razorpay order id
+        "handler": async function (response) {
+
+          // add order on orders table
+          try{
+            const res = await fetch('php/place_order.php', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+              },
+              body: JSON.stringify({
+                address_id: selectedAddress,
+                payment_method: selectedPayment,
+                cart_items: cartItems,
+                total_amount : total_amount
+              }),
+              credentials: 'same-origin'
+            });
+          
+            const data = await res.json();
+            if(data.success){
+              // response.razorpay_payment_id
+              // response.razorpay_order_id
+              // response.razorpay_signature
+              // Send to server to verify
+              const verifyResp = await fetch('./php/verify_payment.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(response)
+              });
+              const verifyData = await verifyResp.json();
+              console.log(verifyData)
+
+              if (verifyData.success) {
+                alert('Payment verified! Order created.');
+                window.location.href= "thankyou.html"
+              } else {
+                alert('Payment verification failed: ' + (verifyData.message || JSON.stringify(verifyData)));
+              }
+            } else {
+              throw new Error(data.message || 'Failed to place order');
+            }
+          } catch (error) {
+            console.error('Error placing order:', error);
+            alert('Failed to place order. Please try again.');
+          }
+        },  
+        "prefill": { "name": "", "email": "" },
+        "theme": { "color": "#F37254" }
+      };
+
+      // We need the key id in the client. Instead of echoing PHP, fetch it from server.
+      // small helper to fetch public key
+      const keyResp = await fetch('./php/get_key.php'); // returns {key: "rzp_test_xxx"}
+      const keyData = await keyResp.json();
+      if (!keyData.key) { alert('No key'); return; }
+      options.key = keyData.key;
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }
+
+
     // Place order
-    async function placeOrder() {
+    async function placeCODOrder() {
       if (!selectedAddress || !selectedPayment) {
         alert('Please select both delivery address and payment method');
         return;
@@ -1014,7 +1180,8 @@
           body: JSON.stringify({
             address_id: selectedAddress,
             payment_method: selectedPayment,
-            cart_items: cartItems
+            cart_items: cartItems,
+            total_amount : total_amount
           }),
           credentials: 'same-origin'
         });

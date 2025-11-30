@@ -137,6 +137,11 @@ CREATE TABLE `product` (
   `status` varchar(20) DEFAULT 'Active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `images` text DEFAULT NULL
+  `product_details` text DEFAULT NULL,
+  `ingredients_heading` text DEFAULT NULL,
+  `ingredients_data` text DEFAULT NULL,
+  `how_to_use_heading` text DEFAULT NULL,
+  `how_to_use_data` text DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -168,8 +173,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `role`) VALUES
-(11, 'vadher harshil', 'harshil01', 'harshil@gmail.com', '$2y$10$Ws4xol1uHD..aambc6BwHufge9Bn4K1jnrnOgBQsmshrP/yjjMtWi', 'customer'),
-(12, 'akash chudasama', 'akash', 'akash@gmail.com', '$2y$10$HHOREzzF3xu55XtW1iG42OxPZr8n/GQ/60S4qqi/DnPRkQKcuQEtK', 'customer');
+(11, 'vadher harshil', 'harshil01', 'harshil@gmail.com', '123asd', 'customer'),
+(12, 'akash chudasama', 'akash', 'akash@gmail.com', '123asd', 'customer');
 
 -- --------------------------------------------------------
 

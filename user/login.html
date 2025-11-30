@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login | Ayushvera</title>
+  <!-- fevicon icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest"> 
+  
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -598,9 +604,10 @@
         const submitBtn = this.querySelector('button[type="submit"]');
         submitBtn.innerHTML = '<i class="fas fa-spinner"></i>';
         submitBtn.disabled = true;
-
+        
         // AJAX authentication
-        fetch('https://aushvera.infinityfreeapp.com/user/php/Login.php', {
+        // use this in deployment https://aushvera.infinityfreeapp.com/user/php/Login.php
+        fetch('./php/Login.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
@@ -614,6 +621,7 @@
             document.querySelector('.auth-container').style.transform = 'perspective(1000px) rotateY(180deg) scale(0.9)';
             document.querySelector('.auth-container').style.opacity = '0.8';
             setTimeout(() => {
+              // window.location.href = '/user/index.html';
               window.location.href = 'index.html';
             }, 800);
           } else if (data.trim() === 'admin_success') {
@@ -623,7 +631,8 @@
             document.querySelector('.auth-container').style.transform = 'perspective(1000px) rotateY(180deg) scale(0.9)';
             document.querySelector('.auth-container').style.opacity = '0.8';
             setTimeout(() => {
-              window.location.href = '../Admin/home.html';
+              // window.location.href = '/Admin/home.php';
+              window.location.href = '../Admin/home.php';
             }, 800);
           } else {
             showMessage(data, 'error');

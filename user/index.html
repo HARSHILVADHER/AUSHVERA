@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ayushvera Globalbiz - Premium Herbal Products</title>
+  <title>Aushvera Globalbiz - Premium Herbal Products</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- fevicon icon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest"> 
   
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -155,6 +162,25 @@
       overflow: hidden;
     }
 
+    .hero-carousel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .carousel-inner,
+    .carousel-item,
+    .carousel-img {
+      height: 100%;
+    }
+    
+    .carousel-img {
+      object-fit: cover; /* images fit container properly */
+    }
+
     .hero::before {
       content: '';
       position: absolute;
@@ -162,7 +188,6 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to right, rgba(7, 27, 66, 0.8) 0%, rgba(7, 27, 66, 0.4) 100%);
       z-index: 1;
     }
 
@@ -934,43 +959,68 @@
       <a href="product.html" class="nav-link">Products</a>
       <a href="aboutus.html" class="nav-link">About Us</a>
       <a href="contactus.html" class="nav-link">Contact</a>
-      <a href="#" class="nav-link">Happy Customer</a>
+      <a href="happy_customer.html" class="nav-link">Happy Customer</a>
     </nav>
-    <div class="header-welcome" style="margin-right: 16px; font-weight: 500; color: white; display: flex; align-items: center;"></div>
+    <div class="header-welcome" class="hidden" style="margin-right: 16px; font-weight: 500; color: white; display: flex; align-items: center;"></div>
     <div class="icons">
-      <a href="cart.html" class="btn btn-outline-light me-2 position-relative">
+      <a href="cart.php" class="btn btn-outline-light ">
         <i class="fas fa-shopping-bag"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count" style="display: none;">
+        <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count" style="display: none;">
           0
-        </span>
+        </span> -->
       </a>
-      <a href="profile.html" class="btn btn-outline-light"><i class="fas fa-user"></i></a>
-      <button class="btn btn-outline-light d-lg-none ms-2" id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+      <a href="profile.php" class="btn btn-outline-light"><i class="fas fa-user"></i></a>
+      <button class="btn btn-outline-light d-lg-none " id="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     </div>
   </header>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu d-lg-none">
-    <!-- Mobile menu content would go here -->
+    <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden flex-col gap-4  bg-white text-black px-4 py-5 mt-5 lg:hidden"
+  >
+    <a href="./index.html" class="block text-black py-2  border-b border-gray-700">Home</a>
+    <a href="./product.html" class="block text-black py-2 border-b border-gray-700">Products</a>
+    <a href="./aboutus.html" class="block text-black py-2 border-b border-gray-700">About Us</a>
+    <a href="./contactus.html" class="block text-black py-2 border-b border-gray-700">Contact</a>
+    <a href="./happy_customer.html" class="block text-black py-2 border-b border-gray-700">Happy Customer</a>
   </div>
 
   <!-- Hero Section -->
   <section class="hero">
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="intro 2.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
+    <!-- Carousel Container -->
+    <div id="heroCarousel" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="./php/uploads/hero-1.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./php/uploads/hero-2.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./php/uploads/hero-3.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./php/uploads/hero-4.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./php/uploads/hero-5.jpg" class="d-block w-100 carousel-img" alt="">
+        </div>
+        <div class="carousel-item">
+          <img src="./php/uploads/hero-2.png" class="d-block w-100 carousel-img" alt="">
+        </div>
+      </div>
+    </div>
     
     <div class="container">
-      <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
-        <h1 class="hero-title animate__animated animate__fadeInDown">Ayushvera<br><span class="text-gold">Herbal Tea</span></h1>
+      <div class="hero-content" data-aos="fade-right" data-aos-duration="1000" style="margin-top: 100px;">
+        <h1 class=" animate__animated animate__fadeInDown"><span class="text-gold hero-title">Pure Herbal Tea</span></h1>
         <p class="hero-subtitle animate__animated animate__fadeIn animate__delay-1s">
-          Experience the perfect blend of nature...<br>
-          Ayushvera Herbal Tea is crafted with the finest ingredients to promote health and wellness.<br> 
-          Our products are <span class="highlight">reliable</span> and <span class="highlight">lab tested</span>, ensuring you get the best quality in every sip.
+          Experience the calming blend of handpicked herbs crafted for natural healing and daily wellness.
         </p>
         <div class="animate__animated animate__fadeIn animate__delay-2s">
-          <a href="product.html" class="btn btn-hero btn-hero-primary">Explore Products</a>
+          <a href="user/login.html" class="btn btn-hero btn-hero-primary">Discover Our Range</a>
           <button class="btn btn-hero btn-hero-outline">Learn More</button>
         </div>
       </div>
@@ -1001,7 +1051,7 @@
         </div>
         <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
           <div class="about-content">
-            <h2>About Ayushvera</h2>
+            <h2>About Aushvera</h2>
             <p>At Aushvera GlobalBiz, we don't just offer natural products — we offer an experience of elegance, heritage, and refinement. Every creation is a tribute to nature's intelligence, crafted with care, precision, and a deep reverence for ancient traditions that have stood the test of time.</p>
             <p>Our ingredients are hand-selected from the roots of history, inspired by sacred knowledge from across India and beyond from healing herbs whispered through Vedic texts to botanical rituals once reserved for kings and sages. We transform this wisdom into world-class products, blending timeless purity with modern luxury.</p>
             <p>But Aushvera is more than purity. We bring you the essence of class, the richness of culture, and the luxurious feeling of intentional living. From the way our products look and feel, to the experience they deliver — every detail is designed to elevate your lifestyle and awaken your senses.</p>
@@ -1058,7 +1108,7 @@
         <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
           <div class="testimonial-card">
             <div class="testimonial-text">
-              The Ayushvera Herbal Tea has transformed my morning routine. I feel more energized and focused throughout the day without the jitters of coffee.
+              The Aushvera Herbal Tea has transformed my morning routine. I feel more energized and focused throughout the day without the jitters of coffee.
             </div>
             <div class="testimonial-author">
               <div class="author-img">
@@ -1273,7 +1323,7 @@
       easing: 'ease-in-out',
       once: true
     });
-    
+
     // Header scroll effect
     window.addEventListener('scroll', function() {
       const header = document.querySelector('header');
@@ -1302,6 +1352,45 @@
       });
     });
     
+    //hero text changes
+    const heroTexts = [
+      {
+        title: "Pure Herbal Tea",
+        desc: "Experience the calming blend of handpicked herbs crafted for natural healing and daily wellness."
+      },
+      {
+        title: "Boost Your Immunity",
+        desc: "Sip the richness of Ayurvedic herbs that naturally strengthen immunity and rejuvenate your body."
+      },
+      {
+        title: "Detox & Refresh",
+        desc: "Cleanse your body with antioxidant-rich herbal tea designed to refresh your mind and soul."
+      },
+      {
+        title: "Nature’s Goodness in Every Sip",
+        desc: "Made with the finest botanical ingredients, our herbal tea brings purity straight from nature."
+      },
+      {
+        title: "Stress Relief Herbal Blend",
+        desc: "Relax and unwind with our soothing herbal formula perfect for stress relief and deep relaxation."
+      },
+      {
+        title: "Ayurvedic Wellness Tea",
+        desc: "A traditional Ayurvedic blend crafted to balance your energy, improve digestion, and promote wellness."
+      }
+    ];
+    const titleEl = document.querySelector(".hero-title");
+    const descEl = document.querySelector(".hero-subtitle");
+
+    const carousel = document.querySelector("#heroCarousel");
+    carousel.addEventListener("slid.bs.carousel", function (event) {
+      const index = event.to;
+
+      titleEl.innerHTML = heroTexts[index].title;
+      descEl.innerHTML = heroTexts[index].desc;
+    });
+
+
     // Lazy load images
     const lazyImages = document.querySelectorAll('img[data-src]');
     const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -1318,11 +1407,12 @@
     lazyImages.forEach(img => imageObserver.observe(img));
     
     // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-      mobileMenu.classList.toggle('show');
+    const btn = document.getElementById("mobile-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("flex");
     });
 
     // Fetch and display the username in the header
